@@ -31,7 +31,7 @@ for port in range(porta_inicial,porta_final,1):
     elif(erro==11):
         port_filtrada.append(port)
     else:
-        print(erro)
+        #print(erro)
         port_fechada.append(port)
     
     
