@@ -1,3 +1,4 @@
+import time
 from socket import *
 
 # Porta que o servidor espera conexoes.
@@ -15,10 +16,10 @@ socketServidor.listen(1)
 while 1:
 
     # Aguardar nova conexao
-    print 'Aguardando conexao...'
+    print ('Aguardando conexao...')
     connectionSocket, addr = socketServidor.accept()
-    print 'Nova conexao recebida!'
+    print ('Nova conexao recebida!')
 
     # Fechamento
-    print 'Fechando socket...'
+    print ('Fechando socket...')
     connectionSocket.close()
