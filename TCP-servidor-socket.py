@@ -1,25 +1,30 @@
-import time
-from socket import *
+import socket
 
-# Porta que o servidor espera conexoes.
-portaServidor = 12000
+# Numero de porta na qual o servidor estara esperando conexoes.
+serverPort = 12000
 
-# Cria o socket. AF_INET e SOCK_STREAM indicam TCP.
-socketServidor = socket(AF_INET, SOCK_STREAM)
+# Criar o socket. AF_INET e SOCK_STREAM indicam TCP.
+serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# Associar o socket a porta
-socketServidor.bind(('', portaServidor))
+# Associar o socket a porta escolhida. Primeiro argumento vazio indica
+# que desejamos aceitar conexoes em qualquer interface de rede desse host
+serverSocket.bind(('', serverPort))
 
-socketServidor.listen(1)
+# Habilitar socket para aceitar conexoes. O argumento 1 indica que ate
+# uma conexao sera deixada em espera, caso recebamos multiplas conexoes
+# simultaneas
+serverSocket.listen(1)
+
+print ('O servidor esta pronto para receber conexoes')
 
 # Loop infinito: servidor eh capaz de tratar multiplas conexoes
 while 1:
 
     # Aguardar nova conexao
     print ('Aguardando conexao...')
-    connectionSocket, addr = socketServidor.accept()
-    print ('Nova conexao recebida!')
-
+    connectionSocket, addr = serverSocket.accept()
+    print ('Ok!')
     # Fechamento
     print ('Fechando socket...')
     connectionSocket.close()
+

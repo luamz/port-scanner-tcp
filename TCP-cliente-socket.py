@@ -1,49 +1,46 @@
-from socket import *
+import socket
 
 print("\nPort Scanner TCP\n-----------------------------")
 
 # Inputs
-host_alvo = input('Digite o hostname ou o endereço IP do host alvo: ')
+host= input('Digite o hostname ou o endereço IP do host alvo: ')
 print("Digite um intervalo de portas para chegar (ex. 1000 e 2000):")
 porta_inicial = int(input("Porta inicial: "))
 porta_final = int(input("Porta final: "))
 
-
 # Status das portas
-port_aberta = []
-port_fechada = []
-port_filtrada = []
+abertas = []
+fechadas = []
+filtradas = []
 
+for porta in range(porta_inicial,porta_final+1,1):
 
-#Cria do socket
-socketCliente = socket(AF_INET, SOCK_STREAM)
-socketCliente.settimeout(0.1)
+    # Criacao do socket
+    clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    clientSocket.settimeout(0.1)
 
+    # Tenta conexão com o servidor
+    try:
+        clientSocket.connect((host,porta))
 
-erro = 0
-for port in range(porta_inicial,porta_final,1):
-
-    #Conexao com o servidor
-    erro = socketCliente.connect_ex((host_alvo, port))
-    if(erro == 0):
-        port_aberta.append(port)
+        # Se consegue conectar
+        abertas.append(porta)
     
-    elif(erro==11):
-        port_filtrada.append(port)
-    else:
-        #print(erro)
-        port_fechada.append(port)
+    # Se não a conexão não é bem sucedida
+    ## Se deu time out
+    except socket.timeout:
+        filtradas.append(porta)
+        
+    ## Se não deu time out, então está fechada
+    except socket.error:
+        fechadas.append(porta)
+
+    # Fechamento
+    clientSocket.close()
     
-    
-    #Fechamento
-    socketCliente.close()
+print("\nPortas\n-----------------------------")
+print("Abertas:", abertas)    
+print("Filtradas:", filtradas)
+print("Fechadas:", fechadas)
 
-
-
-print("\nAnálise das portas:\n-----------------------------")
-print("Portas abertas:", port_aberta)
-print("Portas fechadas:",port_fechada)
-print("Portas filtradas",port_filtrada)
-
-#Fechamento
-socketCliente.close()
+        
