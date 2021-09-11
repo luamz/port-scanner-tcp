@@ -4,7 +4,7 @@ print("\nPort Scanner TCP\n-----------------------------")
 
 # Inputs
 host= input('Digite o hostname ou o endereço IP do host alvo: ')
-print("Digite um intervalo de portas para chegar (ex. 1000 e 2000):")
+print("Digite um intervalo de portas para checar (ex. 1000 e 2000):")
 porta_inicial = int(input("Porta inicial: "))
 porta_final = int(input("Porta final: "))
 
