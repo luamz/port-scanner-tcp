@@ -3,9 +3,9 @@
 A aplicação consiste num scanner que, dado um host alvo e um intervalo de portas, analisa quais delas estão abertas, filtradas ou fechadas. 
 Desenvolvida em Python 3.6.9 e fazendo uso da API de sockets da dita linguagem.
 
-Desenvolvido por Luam Silva, Victória Granja, Lucas Fauster, Antônio Romano e Juliana Moura para a disciplina de Redes de Computadores.
+Desenvolvido por Luam Silva, Victória Granja, Lucas Fauster e Juliana Moura para a disciplina de Redes de Computadores.
 
-O algoritmo consiste em um laço de repetição que testa porta a porta se a conexão à esta é bem sucedida (ou seja, porta aberta),
+O algoritmo consiste em um laço de repetição que testa, porta a porta, se a conexão à esta é bem sucedida (ou seja, porta aberta),
 do contrário faz-se uso de exceções da API de sockets para capturar àquelas portas que são filtradas ou fechadas.
 A maneira pela qual o grupo otimizou a identificação de portas filtradas foi através do método ".settimeout", 
 que define o tempo máximo pelo qual o socket deverá aguardar conexão. O valor padrão de time out adotado foi 1s,
